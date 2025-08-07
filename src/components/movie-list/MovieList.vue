@@ -2,6 +2,7 @@
     <ul class="movie-list list-group" >
         <MovieListItem 
         @onToggle="$emit('onToggle', $event)"  
+        @onRemove="$emit('onRemove',movie.id)"
         v-for="movie in movies" :key="movie.id" :movie="movie" />
     </ul>
 </template>
