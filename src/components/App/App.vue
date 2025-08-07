@@ -6,7 +6,7 @@
         <SearchPanel />
         <AppFilter />
       </div>
-      <MovieList :movies="movies" />
+      <MovieList :movies="movies" @onToggle="onToggleHandler" />
       <MovieAddForm @movieAdded="moviePush" />
     </div>
   </div>
@@ -32,21 +32,21 @@ export default {
     return {
       movies: [
         {
-          id:1,
+          id: 1,
           name: 'Omar',
           viewers: 890,
           favourite: false,
           like: true,
         },
         {
-          id:2,
+          id: 2,
           name: 'Emoire of osman',
           viewers: 356,
           favourite: false,
           like: false,
         },
         {
-          id:3,
+          id: 3,
           name: 'Ertugrul',
           viewers: 494,
           favourite: true,
@@ -57,9 +57,18 @@ export default {
   },
   methods: {
     moviePush(item) {
-      console.log(item);
       this.movies.push(item);
-      console.log(this.movies);
+    },
+    onToggleHandler({id,prop}) {
+      console.log(prop);
+      
+      this.movies= this.movies.map(item => {
+        if (item.id == id) {
+          return {...item,[prop]:!item[prop] }
+
+          }
+        return item
+      })
     }
   }
 }
