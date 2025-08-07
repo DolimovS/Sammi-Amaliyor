@@ -28,6 +28,7 @@
         },
         methods:{
             addMovie(){
+                if(!this.name||!this.viewers)return
                const newMovie={
                 name:this.addName,
                 viewers:this.addViewers,
