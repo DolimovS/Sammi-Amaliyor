@@ -63,6 +63,8 @@ export default {
       console.log(prop);
       
       this.movies= this.movies.map(item => {
+        console.log(item);
+        
         if (item.id == id) {
           return {...item,[prop]:!item[prop] }
 
