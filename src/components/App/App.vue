@@ -3,10 +3,10 @@
     <div class="content">
       <AppInfo :allMoviesCount="movies.length" :favouriteMoviesCount="movies.filter(c => c.favourite).length" />
       <div class="search-panel">
-        <SearchPanel />
+        <SearchPanel :updateTermHandle="updateTermHandle" />
         <AppFilter />
       </div>
-      <MovieList :movies="movies" @onToggle="onToggleHandler" @onRemove="onRemoveHendler" />
+      <MovieList :movies="onSearchHendler(movies,term) " @onToggle="onToggleHandler" @onRemove="onRemoveHendler" />
       <MovieAddForm @movieAdded="moviePush" />
     </div>
   </div>
@@ -52,7 +52,8 @@ export default {
           favourite: true,
           like: false,
         }
-      ]
+      ],
+      term:'',
     }
   },
   methods: {
@@ -74,9 +75,17 @@ export default {
     },
     onRemoveHendler(id){
       this.movies=this.movies.filter(item=>item.id!=id)
+    },
+    onSearchHendler(arr, term){
+      if(term.length==0){
+        return arr
+      }
+      return arr.filter(c=>c.name.toLowerCase().indexOf(term)>-1)
+    },
+    updateTermHandle(term){
+      this.term=term
     }
 
-    
   }
 }
 </script>
