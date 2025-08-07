@@ -33,6 +33,7 @@
                 viewers:this.addViewers,
                 favourite:false,
                 like:false,
+                id: Date.now()
             } 
             this.$emit('movieAdded',newMovie)
             console.log(newMovie);
