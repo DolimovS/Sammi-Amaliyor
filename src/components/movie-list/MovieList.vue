@@ -28,6 +28,7 @@ export default {
 <style scoped>
 .movie-list {
     margin-bottom: 1rem;
+    
     padding: 1.5rem;
     background-color: #fcfaf5;
     border-radius: 4px;

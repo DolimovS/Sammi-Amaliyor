@@ -1,25 +1,18 @@
 <template>
-    <div class="btn-group">
-        <button 
-        class=" btn " type="button" 
-        :class="[filterName=='all'?'btn-dark':'btn-outline-dark']"
-        @click="filterHandler('all')">Barcha kinolar
-    </button>
-        <button 
-        class=" btn btn-outline-dark" type="button" 
-        :class="[filterName=='popular'?'btn-dark':'btn-outline-dark']"
-        @click="filterHandler('popular')">Mashhur  kinolar
-    </button>
-        <button 
-        class=" btn btn-outline-dark" type="button" 
-        :class="[filterName=='mostWiewers'?'btn-dark':'btn-outline-dark']"
-        @click="filterHandler('mostWiewers')">Eng ko'p ko'rilgan  kinolar
-    </button>
+    <div class="btn-group" >
+        <PrimeryButton v-for="title in filterBottons" :key="title.name" 
+        type="button" 
+        :class="[filterName==title.name?'btn-dark':'btn-outline-dark']"
+        @click="filterHandler(title.name)"> {{ title.title }}</PrimeryButton>
     </div>
 </template>
 
 <script>
+import PrimeryButton from '../../ui-components/PrimeryButton.vue'
     export default {
+        components:{
+            PrimeryButton
+        },
         props:{
             updateFilterHandler:{
                 type:Function,
@@ -32,7 +25,21 @@
         },
         data(){
             return{
-                filter:''
+                filter:'',
+                filterBottons:[
+                    {
+                      title:'Barcha kinolar' ,
+                      name:'all'  
+                    },
+                     {
+                      title:'Mashhur  kinolar' ,
+                      name:'popular'  
+                    },
+                     {
+                      title:"Eng ko'p ko'rilgan  kinolar" ,
+                      name:'mostWiewers'  
+                    },
+                ]
             }
         },
         methods:{
