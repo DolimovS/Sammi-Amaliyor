@@ -1,12 +1,17 @@
 <template>
     <div>
-        <input  @input="changeHandler" :value="term"  type="text" class="form-control search-input" placeholder="Kinolarni qidirish">
+        <Input  @input="changeHandler" v-model="term"   class=" search-input" placeholder="Kinolarni qidirish"></Input>
     </div>
 </template>
 
+
 <script>
+import Input from '../../ui-components/Input.vue'
 
 export default {
+    components:{
+        Input
+    },
     data(){
         return{
             term:''
