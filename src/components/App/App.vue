@@ -4,9 +4,12 @@
       <AppInfo :allMoviesCount="movies.length" :favouriteMoviesCount="movies.filter(c => c.favourite).length" />
       <div class="search-panel">
         <SearchPanel :updateTermHandle="updateTermHandle" />
-        <AppFilter />
+        <AppFilter  :filterName="filter" :updateFilterHandler="updateFilterHandler"/>
       </div>
-      <MovieList :movies="onSearchHendler(movies,term) " @onToggle="onToggleHandler" @onRemove="onRemoveHendler" />
+      <MovieList 
+      :movies="onFilterHandler(onSearchHendler(movies,term),filter )" 
+      @onToggle="onToggleHandler" 
+      @onRemove="onRemoveHendler" />
       <MovieAddForm @movieAdded="moviePush" />
     </div>
   </div>
@@ -54,6 +57,7 @@ export default {
         }
       ],
       term:'',
+      filter:'all',
     }
   },
   methods: {
@@ -84,6 +88,20 @@ export default {
     },
     updateTermHandle(term){
       this.term=term
+    },
+    onFilterHandler(arr,filter){
+      switch(filter){
+        case "popular":
+          return arr.filter(c=> c.like)
+        case "mostWiewers":
+          return arr.filter(s=>s.viewers>500)
+
+          default:
+            return arr
+      }
+    },
+    updateFilterHandler(filter){
+      this.filter=filter
     }
 
   }
