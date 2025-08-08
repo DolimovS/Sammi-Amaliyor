@@ -12,7 +12,6 @@
              type="number" 
              class="form-control new-movie-label" 
              placeholder="Necha marta ko'rilgan?">
-
              <button  class="btn btn-outline-dark" type="submit">Qo'shish</button>
         </form>
     </div>
@@ -47,7 +46,7 @@
 
 <style  scoped>
 .movie-add-form{
-        margin-bottom: 1rem;
+    margin-bottom: 1rem;
     padding: 1.5rem;
     background-color: #fcfaf5;
     border-radius: 4px;

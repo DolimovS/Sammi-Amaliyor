@@ -21,7 +21,6 @@
 </template>
 
 <script>
-// console.log(this.movie);
 export default {
     props: {
         movie: {
@@ -31,7 +30,6 @@ export default {
     },
     methods: {
         onLike(id) {
-            // console.log(id);
             this.$emit("onLike", id)
         }
     }
@@ -78,7 +76,6 @@ export default {
 
 .list-group-item .btn-cookie {
     color: #e09f3e;
-    ;
 }
 
 .list-group-item .btn-trash {
