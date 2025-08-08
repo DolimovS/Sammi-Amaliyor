@@ -1,14 +1,18 @@
 <template>
     <div class="btn-group" >
-        <button v-for="title in filterBottons" :key="title.name" 
-        class=" btn " type="button" 
+        <PrimeryButton v-for="title in filterBottons" :key="title.name" 
+        type="button" 
         :class="[filterName==title.name?'btn-dark':'btn-outline-dark']"
-        @click="filterHandler(title.name)"> {{ title.title }}</button>
+        @click="filterHandler(title.name)"> {{ title.title }}</PrimeryButton>
     </div>
 </template>
 
 <script>
+import PrimeryButton from '../../ui-components/PrimeryButton.vue'
     export default {
+        components:{
+            PrimeryButton
+        },
         props:{
             updateFilterHandler:{
                 type:Function,

@@ -12,22 +12,27 @@
              type="number" 
              class="form-control new-movie-label" 
              placeholder="Necha marta ko'rilgan?">
-             <button  class="btn btn-outline-dark" type="submit">Qo'shish</button>
+             <PrimeryButton  class=" btn-outline-dark"  type="submit">Qo'shish</PrimeryButton>
         </form>
     </div>
 </template>
 
 <script>
+import PrimeryButton from '../../ui-components/PrimeryButton.vue'
+
     export default {
+        components:{
+            PrimeryButton
+        },
         data(){
-           return{
+           return{ 
              addName:'',
              addViewers:'',
            }
         },
         methods:{
             addMovie(){
-                if(!this.name||!this.viewers)return
+                 if (!this.addName || !this.addViewers) return;
                const newMovie={
                 name:this.addName,
                 viewers:this.addViewers,
