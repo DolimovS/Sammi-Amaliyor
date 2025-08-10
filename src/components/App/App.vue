@@ -13,10 +13,12 @@
       <MovieAddForm @movieAdded="moviePush" />
     </div>
   </div>
+
 </template>
 
 
 <script>
+import axios from 'axios';
 import AppFilter from '../app-filter/AppFilter.vue';
 import AppInfo from '../app-info/Appinfo.vue';
 import MovieAddForm from '../movie-add-form/MovieAddForm.vue';
@@ -33,33 +35,12 @@ export default {
   },
   data() {
     return {
-      movies: [
-        {
-          id: 1,
-          name: 'Omar',
-          viewers: 890,
-          favourite: false,
-          like: true,
-        },
-        {
-          id: 2,
-          name: 'Emoire of osman',
-          viewers: 356,
-          favourite: false,
-          like: false,
-        },
-        {
-          id: 3,
-          name: 'Ertugrul',
-          viewers: 494,
-          favourite: true,
-          like: false,
-        }
-      ],
+      movies: [],
       term:'',
       filter:'all',
     }
   },
+
   methods: {
     moviePush(item) {
       this.movies.push(item);
@@ -102,8 +83,26 @@ export default {
     },
     updateFilterHandler(filter){
       this.filter=filter
+    },
+    async fatchMovie(){
+      try{
+        const  {data}=await axios.get("https://jsonplaceholder.typicode.com/posts?_limit=10")
+        const newArr=data.map(item=>({
+          id:item.id,
+          name:item.title,
+          like:false,
+          favourite:false,
+          wiewers:item.id * 200
+        }))
+        this.movies=newArr
+      }catch(error){
+        alert(error.message);
+      }
+  
     }
-
+  },
+  mounted(){
+    this.fatchMovie()
   }
 }
 </script>
