@@ -1,6 +1,7 @@
 <template>
-    <li class="list-group-item d-flex  justify-content-between  "
+    <li class="list-group-item d-flex  justify-content-between  align-items-center "
         :class="[{ like: movie.like }, { favourite: movie.favourite }]">
+        <p class="movie_count"><b>{{ index+1 }}</b></p>
         <span @click="$emit('onToggle', { id: movie.id, prop: 'like' })" class="list-group-item-label">{{ movie.name
             }}</span>
         <input type="number" class="list-group-item-input" :value="movie.viewers">
@@ -26,6 +27,10 @@ export default {
         movie: {
             type: Object,
             required: true
+        },
+        index:{
+            type:Number,
+            required:true,
         }
     },
     methods: {
@@ -103,4 +108,15 @@ export default {
 .list-group-item.favourite .list-group-item-input {
     color: #e09f3e;
 }
+.movie_count {
+    width: 20px;
+    height: 30px;
+    /* border: 1px solid red; */
+    margin: 20px;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    
+}
+
 </style>

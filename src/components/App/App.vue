@@ -6,7 +6,14 @@
         <SearchPanel :updateTermHandle="updateTermHandle" />
         <AppFilter  :filterName="filter" :updateFilterHandler="updateFilterHandler"/>
       </div>
+      <Box v-if="!movies.length && !isloading" >
+        <p  class="text-center fs-3 text-danger"  >Kinolar yo'q :(</p>
+       </Box>
+       <Box v-if="isloading" > 
+        <p  class="text-center fs-3 "  >Loading...</p>
+       </Box>
       <MovieList 
+      v-else
       :movies="onFilterHandler(onSearchHendler(movies,term),filter )" 
       @onToggle="onToggleHandler" 
       @onRemove="onRemoveHendler" />
@@ -24,6 +31,7 @@ import AppInfo from '../app-info/Appinfo.vue';
 import MovieAddForm from '../movie-add-form/MovieAddForm.vue';
 import MovieList from '../movie-list/MovieList.vue';
 import SearchPanel from '../search-panel/SearchPanel.vue';
+import Box from '../../ui-components/Box.vue';
 export default {
   components: {
     AppInfo,
@@ -31,6 +39,7 @@ export default {
     AppFilter,
     MovieList,
     MovieAddForm,
+    Box,
 
   },
   data() {
@@ -38,6 +47,7 @@ export default {
       movies: [],
       term:'',
       filter:'all',
+      isloading:false,
     }
   },
 
@@ -85,16 +95,20 @@ export default {
       this.filter=filter
     },
     async fatchMovie(){
+      this.isloading=true;
       try{
-        const  {data}=await axios.get("https://jsonplaceholder.typicode.com/posts?_limit=10")
+       setTimeout(async()=>{
+         const  {data}=await axios.get("https://jsonplaceholder.typicode.com/posts?_limit=1")
         const newArr=data.map(item=>({
           id:item.id,
           name:item.title,
           like:false,
           favourite:false,
-          wiewers:item.id * 200
+          viewers:item.id * 200,
         }))
         this.movies=newArr
+        this.isloading=false
+       },3000)
       }catch(error){
         alert(error.message);
       }
