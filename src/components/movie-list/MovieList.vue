@@ -3,7 +3,7 @@
         <MovieListItem 
         @onToggle="$emit('onToggle', $event)"  
         @onRemove="$emit('onRemove',movie.id)"
-        v-for="movie in movies" :key="movie.id" :movie="movie" />
+        v-for="(movie,index) in movies" :key="movie.id" :movie="movie " :index="index" />
     </ul>
 </template>
 
